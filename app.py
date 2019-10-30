@@ -1,4 +1,3 @@
-
 import pymysql.cursors
 
 from flask import Flask, request, abort
@@ -10,18 +9,19 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
+import os
 
 app = Flask(__name__)
 
 
-
-
+access_token='Pj78g5mXSl5w/HfK3z4Qe4TRDTsi2wJZYZostAp2CHvAJsQZOjd4rI9vwIHYK2RovIjS3FJ8jMyY+Yn58MIdnRoiOTeKdfKGxEp7sYKoFcRhBIYZ7WPctF2NMWCJFyJbSbIIr1APEVLm1UIdcG3UqwdB04t89/1O/w1cDnyilFU='
+chaneL_secret='748e776d2ecd781e5b472c3f6661490b'
 
 
 # Channel Access Token
-line_bot_api = LineBotApi('HFS7TNLYnAS9D6KQ+V+uNlhY6ZpY56bCtVm6ynbZdXmu7RhXnc8CSY3hHpexlG4RvIjS3FJ8jMyY+Yn58MIdnRoiOTeKdfKGxEp7sYKoFcQaiA/j2XIIMJtGyi7eXKjoYZhEpToRWxmjln45nsQCKQdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi(access_token)
 # Channel Secret
-handler = WebhookHandler('9afffb21ab37807247ec158d4c88931e')
+handler = WebhookHandler(chaneL_secret)
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
@@ -44,10 +44,6 @@ def handle_message(event):
     message = TextSendMessage(text=event.message.text)
     line_bot_api.reply_message(event.reply_token, message)
    
-    
-    
-
-import 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
